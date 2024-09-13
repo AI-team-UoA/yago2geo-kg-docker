@@ -6,7 +6,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <#wines> a rep:Repository;
-    rep:repositoryID "da4dte_final";
+    rep:repositoryID "yago2geo";
     rep:repositoryImpl [
         rep:repositoryType "graphdb:SailRepository";
         <http://www.openrdf.org/config/repository/sail#sailImpl> [

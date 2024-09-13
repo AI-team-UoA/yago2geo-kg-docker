@@ -29,32 +29,14 @@ RUN apt-get update \
 RUN wget "https://maven.ontotext.com/repository/owlim-releases/com/ontotext/graphdb/graphdb/${GRAPH_DB_VERSION}/graphdb-${GRAPH_DB_VERSION}-dist.zip" \
 	&& unzip graphdb-${GRAPH_DB_VERSION}-dist.zip
 
-# Copy the knowledge graph data
-COPY data/* .
-
-# Extract the knowledge graph data
-RUN gzip -d da4dte.nt.gz
-
-RUN gzip -d images.nt.gz
-
-RUN gzip -d non_satellite_mat_reduced_map.nt.gz
-
-RUN gzip -d s1_mat_intersects_only_map.nt.gz
-
-RUN gzip -d s2_mat_intersects_only_map.nt.gz
-
-RUN gzip -d da4dte_en_labels_unique.nt.gz
-
-RUN gzip -d seas.nt.gz
-
-RUN gzip -d s1_seas_mat_map.nt.gz
-
-RUN gzip -d s2_seas_mat_map.nt.gz
+# Download the knowledge graph data
+RUN wget "https://yago2geo.di.uoa.gr/data/yago2_plus_geo.zip" \
+    && unzip yago2_plus_geo.zip
 
 COPY template.ttl . 
 
 EXPOSE 7200
 EXPOSE 7300
 
-RUN ./graphdb-10.6.3/bin/importrdf preload -c template.ttl da4dte.nt da4dte_en_labels_unique.nt images.nt non_satellite_mat_reduced_map.nt s1_mat_intersects_only_map.nt s2_mat_intersects_only_map.nt seas.nt s1_seas_mat_map.nt s2_seas_mat_map.nt 
+RUN ./graphdb-10.6.3/bin/importrdf preload -c template.ttl yago-2_ascii.nt yago2geo_ascii.nt yago2geo_mat_area_ascii.nt yago2geo_mat_ascii.nt
 ENTRYPOINT ["./graphdb-10.6.3/bin/graphdb"]

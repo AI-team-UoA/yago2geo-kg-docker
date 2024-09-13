@@ -1,23 +1,15 @@
-# DA4DTE KG DOCKER
+# YAGO2geo Knowledge Graph Docker
 
-Docker to deploy the DA4DTE knowledge graph, using Graphdb.
+Docker to deploy the complete YAGO2geo (including YAGO2) knowledge graph, using Graphdb.
 
-## Docker setup
-
-Create a directory named data:
-
-      mkdir data
-
-Transfer the .gz knowledge graph datafiles inside the new directory:
-
-      mv [path_to_kg_files] data/
+## Setup
 
 To build the docker image run:
 
-      docker build -t graphdb .
+      docker build -t yago2geo .
 
 To run the docker container image run:
 
-      sudo docker run --name graphdb-container -p 7200:7200 graphdb
+      sudo docker run --name yago2geo-graphdb-container -p 7200:7200 yago2geo
 
 A GraphDB instance will be online on http://localhost:7200
